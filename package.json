@@ -10,6 +10,7 @@
     "@types/node": "^16.18.106",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
+    "framer-motion": "^11.3.31",
     "jotai": "^2.9.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
