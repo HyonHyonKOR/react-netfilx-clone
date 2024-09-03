@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { motion, useMotionValue, useTransform } from "framer-motion";
+import { motion, useMotionValue, useScroll, useTransform } from "framer-motion";
 
 const Wrapper = styled(motion.div)`
-  height: 100vh;
+  height: 200vh;
   width: 100vw;
   display: flex;
   justify-content: center;
@@ -20,7 +20,7 @@ const Box = styled(motion.div)`
 
 function App() {
   const x = useMotionValue(0);
-  const rotate = useTransform(x, [-800, 800], [-360, 360]);
+  const rotateZ = useTransform(x, [-800, 800], [-360, 360]);
   const background = useTransform(
     x,
     [-800, 0, 800],
@@ -31,9 +31,11 @@ function App() {
     ]
   );
 
+  const { scrollYProgress } = useScroll();
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 5]);
   return (
     <Wrapper style={{ background: background }}>
-      <Box style={{ x, rotateZ: rotate }} drag="x" dragSnapToOrigin></Box>
+      <Box style={{ x, rotateZ, scale }} drag="x" dragSnapToOrigin></Box>
     </Wrapper>
   );
 }
