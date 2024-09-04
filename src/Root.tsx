@@ -36,6 +36,12 @@ footer, header, hgroup, main, menu, nav, section {
 body {
   line-height: 1;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+
 menu, ol, ul {
   list-style: none;
 }
