@@ -18,6 +18,7 @@ const Nav = styled(motion.nav)`
   font-size: 0.875rem;
   padding: 1.25rem 3.75rem;
   color: white;
+  z-index: 20;
 `;
 
 const navVariant = {
@@ -123,8 +124,9 @@ export default function Header() {
     }
   });
 
+  console.log("header rendered");
   return (
-    <Nav variants={navVariant} initial="top" animate={navAnimation}>
+    <Nav variants={navVariant} animate={navAnimation}>
       <Col>
         <Logo
           xmlns="http://www.w3.org/2000/svg"
@@ -177,6 +179,7 @@ export default function Header() {
             ></path>
           </motion.svg>
           <SearchInput
+            initial={{ scaleX: 0 }}
             animate={{ scaleX: searchOpened ? 1 : 0 }}
             placeholder="Titles,people,genres"
             transition={{ type: "linear" }}

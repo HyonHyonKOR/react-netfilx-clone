@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "../Root";
 import Home from "../pages/Home";
 import Tv from "../pages/Tv";
@@ -10,7 +10,7 @@ const router = createBrowserRouter([
     element: <Root />,
     children: [
       {
-        path: "",
+        path: "/",
         element: <Home />,
       },
       {
@@ -25,4 +25,6 @@ const router = createBrowserRouter([
   },
 ]);
 
-export default router;
+export default function Router() {
+  return <RouterProvider router={router}></RouterProvider>;
+}
