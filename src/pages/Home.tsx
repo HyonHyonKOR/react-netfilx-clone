@@ -15,7 +15,7 @@ const Loader = styled.div`
 `;
 
 const Banner = styled(motion.div)<{ bgphoto: string }>`
-  height: 110vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -42,9 +42,27 @@ const Title = styled.h2`
   margin-bottom: 1.25rem;
 `;
 
+const TopTenLogo = styled.div`
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.25rem;
+  background-color: ${(props) => props.theme.red};
+`;
+
+const RankingContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+`;
+
+const Ranking = styled.h4`
+  font-size: 1.25rem;
+`;
+
 const Overview = styled.p`
-  font-size: 1.5rem;
-  width: 50%;
+  font-size: 1rem;
+  width: 35%;
 `;
 
 export default function Home() {
@@ -58,12 +76,6 @@ export default function Home() {
 
   const showNextBanner = () =>
     setVisibleBanner((prev) => (prev === 9 ? prev - 9 : prev + 1));
-
-  useEffect(() => {
-    setInterval(() => {
-      showNextBanner();
-    }, 1000 * 20);
-  }, []);
 
   return (
     <Wrapper>
@@ -88,6 +100,10 @@ export default function Home() {
                     ? renderTrendingResultType(data?.results[index])
                     : null}
                 </Title>
+                <RankingContainer>
+                  <TopTenLogo></TopTenLogo>
+                  <Ranking>{`#${index + 1} in America Today`}</Ranking>
+                </RankingContainer>
                 <Overview>{data?.results[index].overview}</Overview>
               </Banner>
             ) : null

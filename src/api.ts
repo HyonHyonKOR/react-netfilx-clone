@@ -55,7 +55,7 @@ export interface ITrendingAll {
 
 export function getTrendsAll() {
   console.log("api");
-  return fetch(`${BASE_PATH}/trending/all/week?language=ja-JP?`, AUTH).then(
+  return fetch(`${BASE_PATH}/trending/all/week?language=us-US?`, AUTH).then(
     (response) => response.json()
   );
 }
