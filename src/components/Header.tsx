@@ -1,20 +1,33 @@
-import { motion, useAnimation } from "framer-motion";
+import {
+  motion,
+  useAnimation,
+  useMotionValueEvent,
+  useScroll,
+} from "framer-motion";
 import { useState } from "react";
 import { Link, useMatch } from "react-router-dom";
 import styled from "styled-components";
 
-const Nav = styled.nav`
+const Nav = styled(motion.nav)`
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: fixed;
   width: 100%;
   top: 0;
-  background-color: black;
   font-size: 0.875rem;
   padding: 1.25rem 3.75rem;
   color: white;
 `;
+
+const navVariant = {
+  top: {
+    backgroundColor: "rgba(0,0,0,0)",
+  },
+  scroll: {
+    backgroundColor: "rgba(0,0,0,1)",
+  },
+};
 
 const Col = styled.div`
   display: flex;
@@ -98,10 +111,20 @@ const SearchInput = styled(motion.input)`
 export default function Header() {
   const homeMatch = useMatch("");
   const tvShowsMatch = useMatch("tv");
+  const navAnimation = useAnimation();
+  const { scrollY } = useScroll();
   const [searchOpened, setSearchOpened] = useState(false);
 
+  useMotionValueEvent(scrollY, "change", () => {
+    if (scrollY.get() > 80) {
+      navAnimation.start("scroll");
+    } else {
+      navAnimation.start("top");
+    }
+  });
+
   return (
-    <Nav>
+    <Nav variants={navVariant} initial="top" animate={navAnimation}>
       <Col>
         <Logo
           xmlns="http://www.w3.org/2000/svg"
@@ -132,6 +155,9 @@ export default function Header() {
               {tvShowsMatch && <ItemUnderLine layoutId="itemUnderLine" />}
             </Link>
           </Item>
+          <Item>Movies</Item>
+          <Item>Recently Added</Item>
+          <Item>My List</Item>
         </Items>
       </Col>
       <Col>
