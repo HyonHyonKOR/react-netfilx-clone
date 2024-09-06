@@ -33,6 +33,9 @@ footer, header, hgroup, main, menu, nav, section {
 *[hidden] {
     display: none;
 }
+html{
+  overflow-x:hidden;
+}
 body {
   line-height: 1;
 }
@@ -65,6 +68,7 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
   color:${(props) => props.theme.white.darker};
   line-height: 1.2;
+  background-color: ${(props) => props.theme.black.veryDark};
   
 }
 a {
