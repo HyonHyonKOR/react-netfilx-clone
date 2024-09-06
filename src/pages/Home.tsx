@@ -37,16 +37,33 @@ const bannerVariant = {
   },
 };
 
+const InformationContainer = styled.div`
+  height: 40%;
+`;
+
 const Title = styled.h2`
   font-size: 3.5rem;
   margin-bottom: 1.25rem;
 `;
 
 const TopTenLogo = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 2rem;
   height: 2rem;
   border-radius: 0.25rem;
   background-color: ${(props) => props.theme.red};
+
+  :first-child {
+    font-size: 0.625rem;
+    margin-top: 0.25rem;
+  }
+  :last-child {
+    font-size: 0.875rem;
+    font-weight: bold;
+  }
 `;
 
 const RankingContainer = styled.div`
@@ -77,6 +94,12 @@ export default function Home() {
   const showNextBanner = () =>
     setVisibleBanner((prev) => (prev === 9 ? prev - 9 : prev + 1));
 
+  useEffect(() => {
+    console.log(visibleBanner);
+    const banner = setInterval(showNextBanner, 1000 * 15);
+    return () => clearInterval(banner);
+  }, [visibleBanner]);
+
   return (
     <Wrapper>
       {isLoading ? (
@@ -95,16 +118,22 @@ export default function Home() {
                   data?.results[index].backdrop_path || ""
                 )}
               >
-                <Title>
-                  {data?.results
-                    ? renderTrendingResultType(data?.results[index])
-                    : null}
-                </Title>
-                <RankingContainer>
-                  <TopTenLogo></TopTenLogo>
-                  <Ranking>{`#${index + 1} in America Today`}</Ranking>
-                </RankingContainer>
-                <Overview>{data?.results[index].overview}</Overview>
+                {" "}
+                <InformationContainer>
+                  <Title>
+                    {data?.results
+                      ? renderTrendingResultType(data?.results[index])
+                      : null}
+                  </Title>
+                  <RankingContainer>
+                    <TopTenLogo>
+                      <span>TOP</span>
+                      <span>10</span>
+                    </TopTenLogo>
+                    <Ranking>{`#${index + 1} in America Today`}</Ranking>
+                  </RankingContainer>
+                  <Overview>{data?.results[index].overview}</Overview>
+                </InformationContainer>
               </Banner>
             ) : null
           )}
