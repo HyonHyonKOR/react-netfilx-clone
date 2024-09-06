@@ -173,10 +173,6 @@ const boxVariants = {
   },
 };
 
-const BoxHoverImg = styled(Box)`
-  background-image: url(${(props) => props.bgphoto});
-`;
-
 const Info = styled(motion.div)`
   position: absolute;
   padding: 20px;
@@ -306,9 +302,6 @@ export default function Home() {
                       }}
                       bgphoto={makeImagePath(content.backdrop_path, "w500")}
                     >
-                      <BoxHoverImg
-                        bgphoto={makeImagePath(content.backdrop_path, "w500")}
-                      ></BoxHoverImg>
                       <Info variants={InfoVariants}></Info>
                     </Box>
                   ))}
