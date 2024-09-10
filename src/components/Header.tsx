@@ -124,7 +124,6 @@ export default function Header() {
     }
   });
 
-  console.log("header rendered");
   return (
     <Nav variants={navVariant} animate={navAnimation}>
       <Col>

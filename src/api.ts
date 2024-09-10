@@ -13,7 +13,7 @@ export interface ITrendingMovie {
   adult: boolean;
   video: boolean;
   backdrop_path: string;
-  id: string;
+  id: number;
   title: string;
   original_title: string;
   overview: string;
@@ -31,7 +31,7 @@ export interface ITrendingTVSeries {
   adult: boolean;
   video: boolean;
   backdrop_path: string;
-  id: string;
+  id: number;
   name: string;
   original_name: string;
   overview: string;

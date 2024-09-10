@@ -4,7 +4,17 @@ import styled from "styled-components";
 import { makeImagePath } from "../utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import { IoIosPlay, IoIosInformationCircleOutline } from "react-icons/io";
+import {
+  IoIosPlay,
+  IoIosInformationCircleOutline,
+  IoMdPlay,
+  IoMdAdd,
+} from "react-icons/io";
+import { SlLike, SlDislike } from "react-icons/sl";
+import { MdOutlineFavorite } from "react-icons/md";
+import { IoHeartDislikeOutline } from "react-icons/io5";
+import { useMatch, useNavigate } from "react-router-dom";
+
 const Wrapper = styled.div`
   background-color: black;
 `;
@@ -142,12 +152,9 @@ const rowVariants = {
   },
 };
 
-const Box = styled(motion.div)<{ bgphoto: string }>`
+const Box = styled(motion.div)`
   position: relative;
-  background-color: white;
-  background-image: url(${(props) => props.bgphoto});
-  background-size: cover;
-  background-position: center;
+  background-color: ${(props) => props.theme.black.lighter};
   aspect-ratio: 16 / 9;
   &:first-child {
     transform-origin: center left;
@@ -163,7 +170,7 @@ const boxVariants = {
   },
   hover: {
     scale: 1.3,
-    y: -50,
+    y: -100,
     transition: {
       type: "tween",
       delay: 0.5,
@@ -171,15 +178,31 @@ const boxVariants = {
     },
     zIndex: 21,
   },
+  exit: {
+    transition: {
+      type: "tween",
+      duration: 0,
+    },
+  },
 };
+
+const BoxImage = styled(motion.div)<{ bgphoto: string }>`
+  position: absolute;
+  width: 100%;
+  background-image: url(${(props) => props.bgphoto});
+  background-size: cover;
+  background-position: center;
+  aspect-ratio: 16 / 9;
+  cursor: pointer;
+`;
 
 const Info = styled(motion.div)`
   position: absolute;
-  padding: 20px;
-  background-color: ${(props) => props.theme.black.lighter};
+  padding: 10px;
+  background-color: ${(props) => props.theme.black.darker};
   width: 100%;
   opacity: 0;
-  bottom: 0;
+  bottom: -4.5rem;
 `;
 
 const InfoVariants = {
@@ -187,11 +210,65 @@ const InfoVariants = {
     opacity: 1,
     transition: {
       type: "tween",
-      delay: 0.5,
+      delay: 0.4,
       duration: 0.2,
     },
   },
 };
+
+const InfoTitle = styled.h4`
+  font-size: 0.75rem;
+`;
+
+const InfoButtonsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 0.75rem 0;
+`;
+
+const InfoButtons = styled(motion.div)`
+  display: flex;
+  gap: 0.4rem;
+
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: ${(props) => props.theme.black.lighter};
+    border: 1px solid ${(props) => props.theme.white.darker};
+    border-radius: 50%;
+    font-size: 0.625rem;
+    padding: 0.3rem;
+    cursor: pointer;
+  }
+  div:first-child {
+    background-color: ${(props) => props.theme.white.darker};
+    color: ${(props) => props.theme.black.lighter};
+  }
+`;
+
+const LikeButtons = styled(motion.div)`
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: ${(props) => props.theme.black.lighter};
+    border: 1px solid ${(props) => props.theme.white.darker};
+    border-radius: 50%;
+    font-size: 0.625rem;
+    padding: 0.3rem;
+    cursor: pointer;
+  }
+`;
+
+const Overlay = styled(motion.div)`
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+`;
 
 export default function Home() {
   const { data, isLoading } = useQuery<ITrendingAll>({
@@ -201,7 +278,6 @@ export default function Home() {
   });
 
   const [visibleBanner, setVisibleBanner] = useState(0);
-
   const showNextBanner = () =>
     setVisibleBanner((prev) => (prev === 9 ? prev - 9 : prev + 1));
 
@@ -210,9 +286,9 @@ export default function Home() {
     return () => clearInterval(bannerSlider);
   }, [visibleBanner]);
 
+  const offset = 6;
   const [sliderNumber, setsliderNumber] = useState(0);
   const [isLeaving, setisLeaving] = useState(false);
-
   const showNextTrendingSlider = () => {
     if (data) {
       if (isLeaving) return;
@@ -223,10 +299,19 @@ export default function Home() {
       console.log(sliderNumber);
     }
   };
-
   const toggleLeaving = () => setisLeaving((prev) => !prev);
 
-  const offset = 6;
+  const [likeButtonIsClicked, setLikeButtonIsClicked] = useState(false);
+  const toggleLike = () => setLikeButtonIsClicked((prev) => !prev);
+
+  const getContentId = (contentId: number) => {
+    navigate(`/all/${contentId}`);
+  };
+
+  const navigate = useNavigate();
+  const allMatch = useMatch("all/:contentId");
+
+  const closeModal = () => navigate(-1);
 
   return (
     <Wrapper>
@@ -293,21 +378,83 @@ export default function Home() {
                   .slice(offset * sliderNumber, offset * sliderNumber + offset)
                   .map((content) => (
                     <Box
+                      layoutId={content.id + ""}
                       variants={boxVariants}
                       key={content.id}
                       initial="normal"
                       whileHover="hover"
+                      exit="exit"
                       transition={{
                         type: "tween",
                       }}
-                      bgphoto={makeImagePath(content.backdrop_path, "w500")}
                     >
-                      <Info variants={InfoVariants}></Info>
+                      <BoxImage
+                        bgphoto={makeImagePath(content.backdrop_path, "w500")}
+                        onClick={() => getContentId(content.id)}
+                      ></BoxImage>
+
+                      <Info variants={InfoVariants} exit={{ opacity: 0 }}>
+                        <InfoTitle>
+                          {content ? renderTrendingResultType(content) : null}
+                        </InfoTitle>
+                        <InfoButtonsContainer>
+                          <InfoButtons>
+                            <div>
+                              <IoMdPlay />
+                            </div>
+                            <div>
+                              <IoMdAdd />
+                            </div>
+                            <div>
+                              <SlLike />
+                            </div>
+                            <div>
+                              <SlDislike />
+                            </div>
+                          </InfoButtons>
+                          <LikeButtons onClick={toggleLike}>
+                            {likeButtonIsClicked ? (
+                              <div>
+                                <MdOutlineFavorite />
+                              </div>
+                            ) : (
+                              <div>
+                                <IoHeartDislikeOutline />
+                              </div>
+                            )}
+                          </LikeButtons>
+                        </InfoButtonsContainer>
+                        <div></div>
+                      </Info>
                     </Box>
                   ))}
               </Row>
             </AnimatePresence>
           </Slider>
+          <AnimatePresence>
+            {allMatch ? (
+              <>
+                <Overlay
+                  onClick={closeModal}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                ></Overlay>
+                <motion.div
+                  layoutId={allMatch.params.contentId}
+                  style={{
+                    position: "fixed",
+                    width: "50vw",
+                    height: "70vh",
+                    backgroundColor: "white",
+                    top: 70,
+                    left: 0,
+                    right: 0,
+                    margin: "0 auto",
+                  }}
+                ></motion.div>
+              </>
+            ) : null}
+          </AnimatePresence>
         </>
       )}
     </Wrapper>
