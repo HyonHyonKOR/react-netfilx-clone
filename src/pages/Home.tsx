@@ -132,13 +132,13 @@ const Row = styled(motion.div)`
 
 const rowVariants = {
   hidden: {
-    x: window.outerWidth + 60,
+    x: window.outerWidth,
   },
   visible: {
     x: 0,
   },
   exit: {
-    x: -window.outerWidth - 60,
+    x: -window.outerWidth,
   },
 };
 
