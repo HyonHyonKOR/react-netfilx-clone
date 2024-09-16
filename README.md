@@ -8,7 +8,7 @@
 </p>
 <br>
 <div align="center">
-  <a href="https://hyonhyonkor.github.io/react-netflix-clone/" style="text-decoration: none;">
+  <a href="https://hyonhyonkor.github.io/react-netfilx-clone/" style="text-decoration: none;">
    <img src="https://img.shields.io/badge/GitHub Pages-181717?style=for-the-badge&logo=GitHub&logoColor=white"/>
   </a>
 </div>
