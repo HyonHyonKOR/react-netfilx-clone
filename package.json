@@ -2,6 +2,7 @@
   "name": "react-netflix-clone",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://hyonhyonkor.github.io/react-netfilx-clone/",
   "dependencies": {
     "@tanstack/react-query": "^5.54.1",
     "@testing-library/jest-dom": "^5.17.0",
@@ -12,6 +13,7 @@
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
     "framer-motion": "^11.3.31",
+    "gh-pages": "^6.1.1",
     "jotai": "^2.9.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
