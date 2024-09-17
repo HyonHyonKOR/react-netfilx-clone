@@ -133,7 +133,7 @@ const SliderTitle = styled.h4`
 const Row = styled(motion.div)`
   position: absolute;
   display: grid;
-  gap: 5px;
+  gap: 0.25rem;
   grid-template-columns: repeat(6, 1fr);
   width: 100%;
   padding-left: 3.75rem;
