@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/react-netfilx-clone/static/js/main.b49aefa6.js",
+    "main.js": "/react-netfilx-clone/static/js/main.f8b2a874.js",
     "index.html": "/react-netfilx-clone/index.html",
-    "main.b49aefa6.js.map": "/react-netfilx-clone/static/js/main.b49aefa6.js.map"
+    "main.f8b2a874.js.map": "/react-netfilx-clone/static/js/main.f8b2a874.js.map"
   },
   "entrypoints": [
-    "static/js/main.b49aefa6.js"
+    "static/js/main.f8b2a874.js"
   ]
 }
