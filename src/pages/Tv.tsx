@@ -6,7 +6,7 @@ const TvContainer = styled.div`
   align-items: center;
   margin-top: 5rem;
   background-color: ${(props) => props.theme.black.veryDark};
-  height: 90vh;
+  height: 100vh;
   font-size: 5rem;
 `;
 

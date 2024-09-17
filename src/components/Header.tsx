@@ -159,21 +159,16 @@ export default function Header() {
         </Logo>
         <Items>
           <Item>
-            <Link to="">
-              Home {homeMatch && <ItemUnderLine layoutId="itemUnderLine" />}
-            </Link>
+            <Link to="">Home</Link>
+            {/* {homeMatch && <ItemUnderLine layoutId="itemUnderLine" />} */}
           </Item>
           <Item>
-            <Link to="tv">
-              Tv Shows
-              {tvShowsMatch && <ItemUnderLine layoutId="itemUnderLine" />}
-            </Link>
+            <Link to="tv">Tv Shows</Link>
+            {/* {tvShowsMatch && <ItemUnderLine layoutId="itemUnderLine" />} */}
           </Item>
           <Item>
-            <Link to="movie">
-              Movies
-              {moviesMatch && <ItemUnderLine layoutId="itemUnderLine" />}
-            </Link>
+            <Link to="movie">Movies</Link>
+            {/* {moviesMatch && <ItemUnderLine layoutId="itemUnderLine" />} */}
           </Item>
 
           <Item>Recently Added</Item>
