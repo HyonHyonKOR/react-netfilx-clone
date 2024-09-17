@@ -270,18 +270,31 @@ const Overlay = styled(motion.div)`
   opacity: 0;
 `;
 
+const Modal = styled(motion.div)`
+  position: fixed;
+  width: 40vw;
+  height: 80vh;
+  background-color: ${(props) => props.theme.black.veryDark};
+  border-radius: 15px;
+  overflow: hidden;
+  top: 6rem;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+`;
+
 const ModalImage = styled.div`
   width: 100%;
-  height: 19rem;
+  height: 23rem;
   background-position: center center;
   background-size: cover;
 `;
 const ModalTitle = styled.h3`
   position: relative;
-  top: -4.25rem;
+  top: -4.5rem;
   padding: 1.25rem;
   color: ${(props) => props.theme.white.lighter};
-  font-size: 2.25rem;
+  font-size: 2rem;
 `;
 
 const ModalOverview = styled.p`
@@ -465,21 +478,7 @@ export default function Home() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                 ></Overlay>
-                <motion.div
-                  layoutId={allMatch.params.contentId}
-                  style={{
-                    position: "fixed",
-                    width: "40vw",
-                    height: "90vh",
-                    backgroundColor: "black",
-                    borderRadius: "15px",
-                    overflow: "hidden",
-                    top: 70,
-                    left: 0,
-                    right: 0,
-                    margin: "0 auto",
-                  }}
-                >
+                <Modal layoutId={allMatch.params.contentId}>
                   {clickedTrandingAll && (
                     <>
                       <ModalImage
@@ -492,12 +491,46 @@ export default function Home() {
                       <ModalTitle>
                         {renderTrendingResultType(clickedTrandingAll)}
                       </ModalTitle>
+                      <ButtonContainer
+                        style={{
+                          position: "relative",
+                          top: "-5.5rem",
+                          left: "1.25rem",
+                        }}
+                      >
+                        <PlayButton
+                          style={{
+                            width: "6rem",
+                          }}
+                        >
+                          <IoIosPlay size={21} /> Play
+                        </PlayButton>
+                        <InfoButtonsContainer style={{ marginTop: 0 }}>
+                          <InfoButtons>
+                            <div
+                              style={{
+                                backgroundColor: "rgba(255, 255, 255, 0.2)",
+                                color: "white",
+                              }}
+                            >
+                              <IoMdAdd size={18} />
+                            </div>
+                            <div>
+                              <SlLike size={18} />
+                            </div>
+                            <div>
+                              <SlDislike size={18} />
+                            </div>
+                          </InfoButtons>
+                        </InfoButtonsContainer>
+                      </ButtonContainer>
+
                       <ModalOverview>
                         {clickedTrandingAll.overview}
                       </ModalOverview>
                     </>
                   )}
-                </motion.div>
+                </Modal>
               </>
             ) : null}
           </AnimatePresence>
