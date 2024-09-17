@@ -361,7 +361,6 @@ export default function Home() {
           {data?.results.slice(0, 10).map((item, index) =>
             visibleBanner === index ? (
               <Banner
-                onClick={showNextBanner}
                 variants={bannerVariant}
                 initial="hidden"
                 animate="visible"
