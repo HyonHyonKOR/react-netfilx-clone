@@ -112,6 +112,7 @@ const SearchInput = styled(motion.input)`
 export default function Header() {
   const homeMatch = useMatch("");
   const tvShowsMatch = useMatch("tv");
+  const moviesMatch = useMatch("movie");
   const navAnimation = useAnimation();
   const { scrollY } = useScroll();
   const [searchOpened, setSearchOpened] = useState(false);
@@ -156,7 +157,13 @@ export default function Header() {
               {tvShowsMatch && <ItemUnderLine layoutId="itemUnderLine" />}
             </Link>
           </Item>
-          <Item>Movies</Item>
+          <Item>
+            <Link to="movie">
+              Movies
+              {moviesMatch && <ItemUnderLine layoutId="itemUnderLine" />}
+            </Link>
+          </Item>
+
           <Item>Recently Added</Item>
           <Item>My List</Item>
         </Items>

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const TvContainer = styled.div`
+const MovieContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,10 +10,10 @@ const TvContainer = styled.div`
   font-size: 5rem;
 `;
 
-export default function Tv() {
+export default function Movie() {
   return (
-    <TvContainer>
+    <MovieContainer>
       <h1>Developing...</h1>
-    </TvContainer>
+    </MovieContainer>
   );
 }

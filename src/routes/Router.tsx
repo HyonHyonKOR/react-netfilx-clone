@@ -3,6 +3,7 @@ import Root from "../Root";
 import Home from "../pages/Home";
 import Tv from "../pages/Tv";
 import Search from "../pages/Search";
+import Movie from "../pages/Movie";
 
 const router = createBrowserRouter(
   [
@@ -21,6 +22,10 @@ const router = createBrowserRouter(
         {
           path: "tv",
           element: <Tv />,
+        },
+        {
+          path: "movie",
+          element: <Movie />,
         },
         {
           path: "search",
