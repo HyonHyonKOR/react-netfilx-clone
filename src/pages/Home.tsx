@@ -270,6 +270,26 @@ const Overlay = styled(motion.div)`
   opacity: 0;
 `;
 
+const ModalImage = styled.div`
+  width: 100%;
+  height: 19rem;
+  background-position: center center;
+  background-size: cover;
+`;
+const ModalTitle = styled.h3`
+  position: relative;
+  top: -4.25rem;
+  padding: 1.25rem;
+  color: ${(props) => props.theme.white.lighter};
+  font-size: 2.25rem;
+`;
+
+const ModalOverview = styled.p`
+  position: relative;
+  top: -5rem;
+  padding: 1.25rem;
+  color: ${(props) => props.theme.white.lighter};
+`;
 export default function Home() {
   const { data, isLoading } = useQuery<ITrendingAll>({
     queryKey: ["trendingAll"],
@@ -312,6 +332,12 @@ export default function Home() {
   const allMatch = useMatch("all/:contentId");
 
   const closeModal = () => navigate(-1);
+
+  const clickedTrandingAll =
+    allMatch?.params.contentId &&
+    data?.results.find(
+      (content) => content.id + "" === allMatch.params.contentId
+    );
 
   return (
     <Wrapper>
@@ -443,15 +469,35 @@ export default function Home() {
                   layoutId={allMatch.params.contentId}
                   style={{
                     position: "fixed",
-                    width: "50vw",
-                    height: "70vh",
-                    backgroundColor: "white",
+                    width: "40vw",
+                    height: "90vh",
+                    backgroundColor: "black",
+                    borderRadius: "15px",
+                    overflow: "hidden",
                     top: 70,
                     left: 0,
                     right: 0,
                     margin: "0 auto",
                   }}
-                ></motion.div>
+                >
+                  {clickedTrandingAll && (
+                    <>
+                      <ModalImage
+                        style={{
+                          backgroundImage: `linear-gradient(to top, #000000d5, transparent), url(${makeImagePath(
+                            clickedTrandingAll.backdrop_path
+                          )})`,
+                        }}
+                      />
+                      <ModalTitle>
+                        {renderTrendingResultType(clickedTrandingAll)}
+                      </ModalTitle>
+                      <ModalOverview>
+                        {clickedTrandingAll.overview}
+                      </ModalOverview>
+                    </>
+                  )}
+                </motion.div>
               </>
             ) : null}
           </AnimatePresence>

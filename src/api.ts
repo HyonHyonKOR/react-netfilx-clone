@@ -48,7 +48,7 @@ export interface ITrendingTVSeries {
 
 export interface ITrendingAll {
   page: number;
-  results: ITrendingMovie[] | ITrendingTVSeries[];
+  results: (ITrendingMovie | ITrendingTVSeries)[];
   total_pages: number;
   total_results: number;
 }
