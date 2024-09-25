@@ -1,11 +1,12 @@
+import { KEY } from "./key";
+
 const BASE_PATH = "https://api.themoviedb.org/3";
 
 const AUTH = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNGMwZjhiZWVjM2VlMTgwOWQ2YmUxNjA2NWU1MzhiZCIsIm5iZiI6MTcyNTUwMDI3Mi4yODkzNTEsInN1YiI6IjY2ZDkwODM3Y2VkNGMwYmYxMzA5N2NhMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.0tZZInq28FcACRj8qgml7CLemCm3CR463sMdFQi5Azk",
+    Authorization: KEY,
   },
 };
 
