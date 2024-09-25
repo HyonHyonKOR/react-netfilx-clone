@@ -55,7 +55,6 @@ export interface ITrendingAll {
 }
 
 export function getTrendsAll() {
-  console.log("api");
   return fetch(`${BASE_PATH}/trending/all/week?language=us-US?`, AUTH).then(
     (response) => response.json()
   );
@@ -75,6 +74,13 @@ export function renderTrendingResultType(
   } else {
     return target.name;
   }
+}
+
+export function search(keyword: string): Promise<any> {
+  return fetch(
+    `https://api.themoviedb.org/3/search/multi?query=${keyword}&include_adult=false&language=en-US&page=1`,
+    AUTH
+  ).then((response) => response.json());
 }
 
 /*

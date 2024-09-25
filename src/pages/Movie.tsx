@@ -5,8 +5,8 @@ const MovieContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 5rem;
-  background-color: ${(props) => props.theme.black.darker};
-  height: 90vh;
+  background-color: ${(props) => props.theme.black.veryDark};
+  height: 100vh;
   font-size: 5rem;
 `;
 
