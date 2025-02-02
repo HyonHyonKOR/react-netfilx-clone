@@ -36,9 +36,18 @@
 ## 実装機能 (Features)
 
 - Netflix UI 再現
+  ![Netflix UI](https://github.com/user-attachments/assets/c23999db-8bfc-446b-adaa-f425a0f95ed5)
+ 
 - 自動バナー切り替え機能
+  ![Banner](https://github.com/user-attachments/assets/dd4c3a65-957f-49d2-8cfa-e6fd7d488213)
+   
 - 検索機能
+![Search](https://github.com/user-attachments/assets/82f30dfe-8f3e-4957-9409-42258d2fcae8)
+  
 - 詳細情報を表示するモーダ
+![Modal](https://github.com/user-attachments/assets/e0b83b53-9410-4c29-948e-54b31a9750d3)
+
+  
 
 ## リファクタリング (Refactoring & Optimization)
 
