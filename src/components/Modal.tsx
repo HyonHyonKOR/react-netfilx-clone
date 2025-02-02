@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
-import { makeLargeImagePath } from "../utils";
+import { makeImagePath } from "../utils";
 import { IoIosPlay } from "react-icons/io";
 import { IoMdAdd } from "react-icons/io";
 import { SlLike, SlDislike } from "react-icons/sl";
@@ -108,7 +108,9 @@ export function Modal({ isOpen, onClose, content }: ModalProps) {
             exit={{ opacity: 0 }}
           >
             <ModalContainer layoutId={content.id + ""}>
-              <ModalImage bgphoto={makeLargeImagePath(content.backdrop_path)} />
+              <ModalImage
+                bgphoto={makeImagePath(content.backdrop_path, "w1280")}
+              />
               <ModalTitle>{content.title || content.name}</ModalTitle>
               <ButtonContainer>
                 <PlayButton>
