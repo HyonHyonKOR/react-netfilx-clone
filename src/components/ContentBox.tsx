@@ -4,7 +4,10 @@ import { makeImagePath } from "../utils";
 import { renderTrendingResultType } from "../service/api";
 import { IoMdPlay, IoMdAdd } from "react-icons/io";
 import { SlLike, SlDislike } from "react-icons/sl";
+import { MdOutlineFavorite } from "react-icons/md";
+import { IoHeartDislikeOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Box = styled(motion.div)`
   position: relative;
@@ -61,6 +64,20 @@ const InfoButtons = styled.div`
   gap: 0.5rem;
 `;
 
+const LikeButtons = styled(motion.div)`
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: ${(props) => props.theme.black.lighter};
+    border: 1px solid ${(props) => props.theme.white.darker};
+    border-radius: 50%;
+    font-size: 0.625rem;
+    padding: 0.3rem;
+    cursor: pointer;
+  }
+`;
+
 const boxVariants = {
   normal: { scale: 1 },
   hover: {
@@ -81,6 +98,9 @@ interface ContentBoxProps {
 
 export function ContentBox({ content }: ContentBoxProps) {
   const navigate = useNavigate();
+  const [likeButtonIsClicked, setLikeButtonIsClicked] = useState(false);
+  const toggleLike = () => setLikeButtonIsClicked((prev) => !prev);
+
   const getContentId = (contentId: number) => {
     navigate(`/all/${contentId}`);
   };
@@ -114,6 +134,17 @@ export function ContentBox({ content }: ContentBoxProps) {
               <SlDislike />
             </div>
           </InfoButtons>
+          <LikeButtons onClick={toggleLike}>
+            {likeButtonIsClicked ? (
+              <div>
+                <MdOutlineFavorite />
+              </div>
+            ) : (
+              <div>
+                <IoHeartDislikeOutline />
+              </div>
+            )}
+          </LikeButtons>
         </InfoButtonsContainer>
       </Info>
     </Box>

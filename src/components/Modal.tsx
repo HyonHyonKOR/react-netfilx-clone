@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import { makeLargeImagePath } from "../utils";
+import { IoIosPlay } from "react-icons/io";
+import { IoMdAdd } from "react-icons/io";
+import { SlLike, SlDislike } from "react-icons/sl";
 
 const Overlay = styled(motion.div)`
   position: fixed;
@@ -29,7 +32,8 @@ const ModalContainer = styled(motion.div)`
 const ModalImage = styled.div<{ bgphoto: string }>`
   width: 100%;
   height: 400px;
-  background-image: url(${(props) => props.bgphoto});
+  background-image: linear-gradient(to top, #181818, transparent),
+    url(${(props) => props.bgphoto});
   background-size: cover;
   background-position: center center;
 `;
@@ -39,7 +43,7 @@ const ModalTitle = styled.h3`
   padding: 20px;
   font-size: 32px;
   position: relative;
-  top: -60px;
+  top: -80px;
 `;
 
 const ModalOverview = styled.p`
@@ -47,6 +51,44 @@ const ModalOverview = styled.p`
   position: relative;
   top: -60px;
   color: ${(props) => props.theme.white.lighter};
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  position: relative;
+  top: -4rem;
+  padding: 0 20px;
+`;
+
+const PlayButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 1.6rem;
+  background-color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+`;
+
+const InfoButtons = styled.div`
+  display: flex;
+  gap: 0.8rem;
+
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    cursor: pointer;
+  }
 `;
 
 interface ModalProps {
@@ -68,6 +110,23 @@ export function Modal({ isOpen, onClose, content }: ModalProps) {
             <ModalContainer layoutId={content.id + ""}>
               <ModalImage bgphoto={makeLargeImagePath(content.backdrop_path)} />
               <ModalTitle>{content.title || content.name}</ModalTitle>
+              <ButtonContainer>
+                <PlayButton>
+                  <IoIosPlay size={20} />
+                  Play
+                </PlayButton>
+                <InfoButtons>
+                  <div>
+                    <IoMdAdd size={20} />
+                  </div>
+                  <div>
+                    <SlLike size={20} />
+                  </div>
+                  <div>
+                    <SlDislike size={20} />
+                  </div>
+                </InfoButtons>
+              </ButtonContainer>
               <ModalOverview>{content.overview}</ModalOverview>
             </ModalContainer>
           </Overlay>
