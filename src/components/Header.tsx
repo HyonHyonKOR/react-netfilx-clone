@@ -24,6 +24,7 @@ const Nav = styled(motion.nav)`
   padding: 1.25rem 3.75rem;
   color: white;
   z-index: 20;
+  transform: translateZ(0);
 `;
 
 const navVariant = {
@@ -80,7 +81,7 @@ const Item = styled.li`
   }
 `;
 
-const ItemUnderLine = styled(motion.span)`
+const ItemUnderLine = styled.span`
   position: absolute;
   width: 100%;
   height: 0.0125rem;
@@ -160,15 +161,15 @@ export default function Header() {
         <Items>
           <Item>
             <Link to="">Home</Link>
-            {/* {homeMatch && <ItemUnderLine layoutId="itemUnderLine" />} */}
+            {homeMatch && <ItemUnderLine />}
           </Item>
           <Item>
             <Link to="tv">Tv Shows</Link>
-            {/* {tvShowsMatch && <ItemUnderLine layoutId="itemUnderLine" />} */}
+            {tvShowsMatch && <ItemUnderLine />}
           </Item>
           <Item>
             <Link to="movie">Movies</Link>
-            {/* {moviesMatch && <ItemUnderLine layoutId="itemUnderLine" />} */}
+            {moviesMatch && <ItemUnderLine />}
           </Item>
 
           <Item>Recently Added</Item>
