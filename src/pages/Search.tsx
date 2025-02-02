@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { search } from "../api";
+import { search } from "../service/api";
 import { useQuery } from "@tanstack/react-query";
 import styled from "styled-components";
 import { makeImagePath } from "../utils";
