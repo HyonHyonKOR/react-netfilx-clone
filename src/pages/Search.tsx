@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import { search } from "../service/api";
 import { useQuery } from "@tanstack/react-query";
 import styled from "styled-components";
-import { makeImagePath } from "../utils";
+import { makeSmallImagePath } from "../utils";
 
 const Wrapper = styled.div`
   margin: 0 3.75rem;
@@ -61,7 +61,7 @@ export default function Search() {
       ) : (
         <Grid>
           {data?.results.map((item: any) => (
-            <Box key={item.id} bgphoto={makeImagePath(item.backdrop_path)}>
+            <Box key={item.id} bgphoto={makeSmallImagePath(item.backdrop_path)}>
               <BoxTitle>{item.title ? item.title : item.name}</BoxTitle>
             </Box>
           ))}
