@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
-import { makeImagePath } from "../utils";
-import { renderTrendingResultType } from "../service/api";
+import { makeLargeImagePath } from "../utils";
 
 const Overlay = styled(motion.div)`
   position: fixed;
@@ -30,8 +29,7 @@ const ModalContainer = styled(motion.div)`
 const ModalImage = styled.div<{ bgphoto: string }>`
   width: 100%;
   height: 400px;
-  background-image: linear-gradient(to top, #181818, transparent),
-    url(${(props) => props.bgphoto});
+  background-image: url(${(props) => props.bgphoto});
   background-size: cover;
   background-position: center center;
 `;
@@ -68,8 +66,8 @@ export function Modal({ isOpen, onClose, content }: ModalProps) {
             exit={{ opacity: 0 }}
           >
             <ModalContainer layoutId={content.id + ""}>
-              <ModalImage bgphoto={makeImagePath(content.backdrop_path)} />
-              <ModalTitle>{renderTrendingResultType(content)}</ModalTitle>
+              <ModalImage bgphoto={makeLargeImagePath(content.backdrop_path)} />
+              <ModalTitle>{content.title || content.name}</ModalTitle>
               <ModalOverview>{content.overview}</ModalOverview>
             </ModalContainer>
           </Overlay>

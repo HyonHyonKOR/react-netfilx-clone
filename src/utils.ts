@@ -3,3 +3,7 @@ export function makeImagePath(photoId: string, format?: string) {
     format ? format : "original"
   }/${photoId}`;
 }
+
+export function makeLargeImagePath(id: string, format?: string) {
+  return `https://image.tmdb.org/t/p/w1280${id}`;
+}
