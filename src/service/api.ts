@@ -62,7 +62,7 @@ export function getTrendsAll() {
 export function isTrendingMovie(
   target: ITrendingMovie | ITrendingTVSeries
 ): target is ITrendingMovie {
-  return (target as ITrendingMovie).title !== undefined;
+  return "title" in target;
 }
 
 export function renderTrendingResultType(
